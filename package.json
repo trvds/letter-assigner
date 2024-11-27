@@ -1,6 +1,5 @@
 {
   "name": "letter-assigner",
-  "homepage": "https://trvds.github.io/letter-assigner",
   "private": true,
   "version": "0.0.0",
   "type": "module",
