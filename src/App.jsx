@@ -5,8 +5,12 @@ const NameLetterAssigner = () => {
   const [currentName, setCurrentName] = useState('');
   const [draggedIndex, setDraggedIndex] = useState(null);
   const [copied, setCopied] = useState(false);
+  const [useNatoAlphabet, setUseNatoAlphabet] = useState(false);
   const textAreaRef = useRef(null);
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  const natoAlphabet = [
+    'Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot', 'Golf', 'Hotel', 'India', 'Juliett', 'Kilo', 'Lima', 'Mike', 'November', 'Oscar', 'Papa', 'Quebec', 'Romeo', 'Sierra', 'Tango', 'Uniform', 'Victor', 'Whiskey', 'X-ray', 'Yankee', 'Zulu'
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,7 +37,8 @@ const NameLetterAssigner = () => {
 
   const assignLetters = (nameIndex, totalNames) => {
     if (totalNames === 0) return '';
-    return alphabet.filter((_, index) => index % totalNames === nameIndex).join(' ');
+    const selectedAlphabet = useNatoAlphabet ? natoAlphabet : alphabet;
+    return selectedAlphabet.filter((_, index) => index % totalNames === nameIndex).join(' ');
   };
 
   const handleCopy = () => {
@@ -79,6 +84,17 @@ const NameLetterAssigner = () => {
             >
               Add Name
             </button>
+          </div>
+
+          <div className="flex items-center mb-6">
+            <input
+              type="checkbox"
+              checked={useNatoAlphabet}
+              onChange={(e) => setUseNatoAlphabet(e.target.checked)}
+              id="natoAlphabetCheckbox"
+              className="mr-2 rounded"
+            />
+            <label htmlFor="natoAlphabetCheckbox">Use NATO Phonetic Alphabet</label>
           </div>
 
           <div className="space-y-2">
